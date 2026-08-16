@@ -35,15 +35,33 @@ A gamified study tracker. Create quests, complete them, run focus sessions, and 
 
 <br>
 
-## Tech stack
 
-| | |
+## Tech Stack
+
+### Frontend
+
+<p>
+  <img src="https://skillicons.dev/icons?i=react,vite,js,css" />
+</p>
+
+### Backend & Database
+
+<p>
+  <img src="https://skillicons.dev/icons?i=nodejs,express,mongodb" />
+</p>
+
+### Tools
+
+<p>
+  <img src="https://skillicons.dev/icons?i=git,github" />
+</p>
+
+| Layer | Technology |
 |---|---|
-| **Frontend** | React (Vite), Axios |
+| **Frontend** | React, Vite, Axios |
 | **Backend** | Node.js, Express |
-| **Database** | MongoDB Atlas via Mongoose |
-| **Styling** | Plain CSS (no framework) |
-
+| **Database** | MongoDB Atlas, Mongoose |
+| **Styling** | Plain CSS |
 <br>
 
 ## Project structure
