@@ -1,4 +1,4 @@
-# Quest & Focus Hub
+# QuestLy
 
 A gamified study tracker. Create quests, complete them, run focus sessions, and level up — with multiple profiles and a history log of everything you've earned.
 
@@ -8,15 +8,20 @@ A gamified study tracker. Create quests, complete them, run focus sessions, and 
 
 **Profile creation**
 
-![Profile creation](client/public/screenshots/profile-creation.png)
+![Profile creation](client/public/1.png)
 
 **Main dashboard**
 
-![Main dashboard](client/public/screenshots/main-ui.png)
+![Main dashboard](client/public/2.png)
+
+**Task Updation**
+
+![Task Updation](client/public/3.png)
+
 
 **MongoDB Atlas**
 
-![MongoDB Atlas data](client/public/screenshots/mongodb.png)
+![MongoDB Atlas data](client/public/4.png)
 
 <br>
 
@@ -48,7 +53,7 @@ gamified-study-tracker/
 ├── client/
 │   ├── public/
 │   │   ├── assets/bg.jpg
-│   │   └── screenshots/            # demo images referenced in this README
+│   │   └── 1,2,3,4          # demo images referenced in this README
 │   └── src/
 │       ├── api/api.js              # axios client — users, tasks, history
 │       ├── App.jsx                 # profile picker + main hub
