@@ -11,7 +11,9 @@ services:
     volumes:
       - mongo_dev_data:/data/db
     networks:
-      - questly-dev-network
+      questly-dev-network:
+        aliases:
+          - mongo
     healthcheck:
       test: ["CMD-SHELL", "mongosh --eval 'db.runCommand(\"ping\").ok' --quiet"]
       interval: 5s
@@ -28,6 +30,7 @@ services:
     environment:
       ME_CONFIG_MONGODB_SERVER: questly-db
       ME_CONFIG_MONGODB_PORT: "27017"
+      ME_CONFIG_MONGODB_URL: mongodb://questly-db:27017
       ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
       ME_CONFIG_BASICAUTH: "false"
     depends_on:

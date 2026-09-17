@@ -11,9 +11,11 @@ services:
     volumes:
       - mongo_data:/data/db
     networks:
-      - questly-network
+      questly-network:
+        aliases:
+          - mongo
     healthcheck:
-      test: ["CMD-SHELL", "mongosh --eval 'db.runCommand(\"ping\").ok' --quiet"]
+      test: [ "CMD-SHELL", "mongosh --eval 'db.runCommand(\"ping\").ok' --quiet" ]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -31,6 +33,7 @@ services:
     environment:
       ME_CONFIG_MONGODB_SERVER: questly-db
       ME_CONFIG_MONGODB_PORT: "27017"
+      ME_CONFIG_MONGODB_URL: mongodb://questly-db:27017
       ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
       ME_CONFIG_BASICAUTH: "false"
     depends_on:
@@ -43,6 +46,7 @@ services:
   # 3. questly-server: Express REST API with Live Nodemon Reload
   # ==========================================================
   questly-server:
+    image: pillaisarveshx03/questly-server:v2
     build:
       context: ./v2/server
       dockerfile: Dockerfile
@@ -67,6 +71,7 @@ services:
   # 4. questly-client: Vite + React Gamified Dashboard
   # ==========================================================
   questly-client:
+    image: pillaisarveshx03/questly-client:v2
     build:
       context: ./v2/client
       dockerfile: Dockerfile
