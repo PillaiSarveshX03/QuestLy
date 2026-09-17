@@ -2,26 +2,28 @@
 
 A gamified study tracker. Create quests, complete them, run focus sessions, and level up — with multiple profiles and a history log of everything you've earned.
 
+> 📁 **Legacy Version (v1):** The initial release has been moved to [**v1/**](./v1). Click here to explore [**QuestLy v1 Source & Documentation ➔**](./v1)
+
 <br>
 
 ## Demo
 
 **Profile creation**
 
-![Profile creation](client/public/1.png)
+![Profile creation](v1/client/public/1.png)
 
 **Main dashboard**
 
-![Main dashboard](client/public/2.png)
+![Main dashboard](v1/client/public/2.png)
 
 **Task Updation**
 
-![Task Updation](client/public/3.png)
+![Task Updation](v1/client/public/3.png)
 
 
 **MongoDB Atlas**
 
-![MongoDB Atlas data](client/public/4.png)
+![MongoDB Atlas data](v1/client/public/4.png)
 
 <br>
 
@@ -67,34 +69,35 @@ A gamified study tracker. Create quests, complete them, run focus sessions, and 
 ## Project structure
 
 ```
-gamified-study-tracker/
-├── client/
-│   ├── public/
-│   │   ├── assets/bg.jpg
-│   │   └── 1,2,3,4          # demo images referenced in this README
-│   └── src/
-│       ├── api/api.js              # axios client — users, tasks, history
-│       ├── App.jsx                 # profile picker + main hub
-│       ├── index.css               # theme + layout
-│       └── main.jsx
-└── server/
-    ├── config/db.js
-    ├── models/
-    │   ├── User.js
-    │   ├── Task.js
-    │   └── History.js
-    ├── routes/
-    │   ├── userRoutes.js
-    │   ├── taskRoutes.js
-    │   └── historyRoutes.js
-    ├── utils/awardXp.js
-    ├── .env
-    └── server.js
+QuestLy/
+└── v1/
+    ├── client/
+    │   ├── public/
+    │   │   ├── assets/bg.jpg
+    │   │   └── 1,2,3,4          # demo images referenced in this README
+    │   └── src/
+    │       ├── api/api.js       # axios client — users, tasks, history
+    │       ├── App.jsx          # profile picker + main hub
+    │       ├── index.css        # theme + layout
+    │       └── main.jsx
+    └── server/
+        ├── config/db.js
+        ├── models/
+        │   ├── User.js
+        │   ├── Task.js
+        │   └── History.js
+        ├── routes/
+        │   ├── userRoutes.js
+        │   ├── taskRoutes.js
+        │   └── historyRoutes.js
+        ├── utils/awardXp.js
+        ├── .env
+        └── server.js
 ```
 
 <br>
 
-## Getting started
+## Getting started (v1)
 
 ### 1. Database
 
@@ -103,11 +106,11 @@ Create a free cluster on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) an
 ### 2. Backend
 
 ```bash
-cd server
+cd v1/server
 npm install
 ```
 
-Create `server/.env`:
+Create `v1/server/.env`:
 
 ```
 PORT=5000
@@ -125,7 +128,7 @@ Server starts at `http://localhost:5000`.
 ### 3. Frontend
 
 ```bash
-cd client
+cd v1/client
 npm install
 npm run dev
 ```
