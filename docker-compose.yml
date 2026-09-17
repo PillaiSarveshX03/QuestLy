@@ -1,0 +1,100 @@
+services:
+  # ==========================================================
+  # 1. questly-db: Local MongoDB Service with Persistent Storage
+  # ==========================================================
+  questly-db:
+    image: mongo:7.0
+    container_name: questly-db
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - questly-network
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --eval 'db.runCommand(\"ping\").ok' --quiet"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+  # ==========================================================
+  # 2. questly-mongo-express: Zero-Install Browser DB Admin GUI
+  # ==========================================================
+  questly-mongo-express:
+    image: mongo-express:1.0.2
+    container_name: questly-mongo-express
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: questly-db
+      ME_CONFIG_MONGODB_PORT: "27017"
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+      ME_CONFIG_BASICAUTH: "false"
+    depends_on:
+      questly-db:
+        condition: service_healthy
+    networks:
+      - questly-network
+
+  # ==========================================================
+  # 3. questly-server: Express REST API with Live Nodemon Reload
+  # ==========================================================
+  questly-server:
+    build:
+      context: ./v2/server
+      dockerfile: Dockerfile
+    container_name: questly-server
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+      MONGO_URI: mongodb://questly-db:27017/questly
+      NODE_ENV: development
+    volumes:
+      - ./v2/server:/app
+      - /app/node_modules
+    depends_on:
+      questly-db:
+        condition: service_healthy
+    networks:
+      - questly-network
+
+  # ==========================================================
+  # 4. questly-client: Vite + React Gamified Dashboard
+  # ==========================================================
+  questly-client:
+    build:
+      context: ./v2/client
+      dockerfile: Dockerfile
+    container_name: questly-client
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    environment:
+      BACKEND_URL: http://questly-server:5000
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - ./v2/client:/app
+      - /app/node_modules
+    depends_on:
+      - questly-server
+    networks:
+      - questly-network
+
+# ==========================================================
+# Named Volumes: Keeps MongoDB Data Safe Across Reboots
+# ==========================================================
+volumes:
+  mongo_data:
+    driver: local
+
+# ==========================================================
+# Internal Network: DNS-Based Service-to-Service Communication
+# ==========================================================
+networks:
+  questly-network:
+    driver: bridge
